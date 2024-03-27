@@ -36,7 +36,7 @@ public class LoginController {
             System.out.println("Global error: " + bindings.getGlobalErrors());
             System.out.println("Field error:" + bindings.getFieldErrors());
         } else {
-            mav.setViewName("view1"); // redirect?
+            mav.setViewName("view1");
             session.setAttribute("login", login);
             System.out.println(login.toString());
         }

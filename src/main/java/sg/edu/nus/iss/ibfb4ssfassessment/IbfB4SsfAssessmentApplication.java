@@ -35,11 +35,10 @@ public class IbfB4SsfAssessmentApplication implements CommandLineRunner {
 			databaseService.saveRecord(movie);
 		}
 
-		System.out.println("Number of movies: " + databaseService.getNumberOfMovies());
-
-		System.out.println(databaseService.getMovieById(12333).toString());
-
-		System.out.println(databaseService.getAllMovies().toString());
+		// for testing
+		// System.out.println("Number of movies: " + databaseService.getNumberOfMovies());
+		// System.out.println(databaseService.getMovieById(12333).toString());
+		// System.out.println(databaseService.getAllMovies().toString());
 	}
 
 }

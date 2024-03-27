@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ibfb4ssfassessment.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
+import sg.edu.nus.iss.ibfb4ssfassessment.model.Login;
 import sg.edu.nus.iss.ibfb4ssfassessment.model.Movie;
 import sg.edu.nus.iss.ibfb4ssfassessment.service.DatabaseService;
 
@@ -38,29 +40,34 @@ public class MovieController {
     @GetMapping(path = "/book/{movieId}")
     public String bookMovie(@PathVariable("movieId") String movieId, Model model, HttpSession httpSession) {
 
-        // get the movie object
-        Movie movie = databaseService.getMovieById(Integer.parseInt(movieId));
+        if (null != httpSession.getAttribute("login")) {
 
-        // calculate the age
-        httpSession.getAttribute("login");
+            Movie movie = databaseService.getMovieById(Integer.parseInt(movieId));
 
-        Long age = 14L;
+            Login login = (Login) httpSession.getAttribute("login");
+            Date dob = login.getBirthDate();
+            Date currentDate = new Date();
 
-        // success or error due to age
-        if ("R".equals(movie.getRating())) {
-            if (age >= 18) {
-                return "BookSuccess";
-            } else {
+            // System.out.println("DOB: " + dob);
+            // System.out.println("Current date: " + currentDate);
+
+            long timeDifference = currentDate.getTime() - dob.getTime(); // millis
+            long age = (timeDifference / (1000L * 60 * 60 * 24 * 365));
+
+            // System.out.println("Age: " + age);
+            // System.out.println("rating: " + movie.getRated());
+
+            if ("R".equals(movie.getRated()) && age < 18) {
                 return "BookError";
-            }
-        } else if ("PG-13".equals(movie.getRating())){
-            if (age >= 13) {
-                return "BookSuccess";
-            } else {
+            } else if ("PG-13".equals(movie.getRated()) && age < 13) {
                 return "BookError";
+            } else {
+                
+                model.addAttribute("movie", movie);
+                return "BookSuccess";
             }
         } else {
-            return "BookSuccess";
+            return "redirect:/login";
         }
 
     }
