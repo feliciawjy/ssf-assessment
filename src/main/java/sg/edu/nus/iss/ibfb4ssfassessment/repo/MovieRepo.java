@@ -1,5 +1,8 @@
 package sg.edu.nus.iss.ibfb4ssfassessment.repo;
 
+import java.io.StringReader;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.HashOperations;
@@ -28,17 +31,25 @@ public class MovieRepo {
     // Read
     // get length
     public long getNumberOfMovies() {
-        HashOperations <String, String, String> hashOps = redisTemplate.opsForHash();
+        HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
         return hashOps.size(Util.KEY_MOVIE);
     }
-    
+
     // read all
 
     // read one
-    public Movie getMovie(Integer index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMovie'");
+    // public Movie getMovie(Integer index) {
+    // // TODO Auto-generated method stub
+    // throw new UnsupportedOperationException("Unimplemented method 'getMovie'");
+    // }
+
+    // read one by id
+    public Movie getMovieById(int id) {
+        HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
+        String movieString = hashOps.get(Util.KEY_MOVIE, Integer.toString(id));
+        return parseMovieFromJsonString(movieString);
     }
+
     // Update
     // Delete
 
@@ -58,6 +69,25 @@ public class MovieRepo {
 
     }
 
+    private Movie parseMovieFromJsonString(String movieString) {
 
+        JsonObject jObject = Json.createReader(new StringReader(movieString)).readObject();
+        Movie movie = new Movie();
+        movie.setMovieId(jObject.getInt("Id"));
+        movie.setTitle(jObject.getString("Title"));
+        movie.setYear(jObject.getString("Year"));
+        movie.setRated(jObject.getString("Rated"));
+        movie.setReleaseDate(jObject.getJsonNumber("Released").longValue());
+        movie.setRunTime(jObject.getString("Runtime"));
+        movie.setGenre(jObject.getString("Genre"));
+        movie.setDirector(jObject.getString("Director"));
+        movie.setRating(jObject.getJsonNumber("Rating").doubleValue());
+        movie.setCount(jObject.getInt("Count"));
+
+        movie.setFormattedReleaseDate(new Date(movie.getReleaseDate()));
+
+        return movie;
+
+    }
 
 }

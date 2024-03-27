@@ -27,9 +27,9 @@ public class FileService {
 
         List<Movie> movieList = new ArrayList<>();
 
-        jsonArray.forEach(prod -> {
+        jsonArray.forEach(mov -> {
 
-            JsonObject jObject = prod.asJsonObject();
+            JsonObject jObject = mov.asJsonObject();
             Movie movie = new Movie();
             movie.setMovieId(jObject.getInt("Id"));
             movie.setTitle(jObject.getString("Title"));

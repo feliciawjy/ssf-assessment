@@ -21,18 +21,17 @@ public class DatabaseService {
 
     // TODO: Task 3 (Map or List - comment where necesary)
     public long getNumberOfMovies() {
-        long numberOfMovies = repo.getNumberOfMovies();
-        return numberOfMovies;
+        return repo.getNumberOfMovies();
     }
 
-    public Movie getMovie(Integer index) {
-        return repo.getMovie(index);
-    }
+    // public Movie getMovie(Integer index) {
+    // return repo.getMovie(index);
+    // }
 
     // TODO: Task 4 (Map)
-    public Movie getMovieById(Integer movieId) {
+    public Movie getMovieById(int movieId) {
 
-        return null;
+        return repo.getMovieById(movieId);
     }
 
     // TODO: Task 5

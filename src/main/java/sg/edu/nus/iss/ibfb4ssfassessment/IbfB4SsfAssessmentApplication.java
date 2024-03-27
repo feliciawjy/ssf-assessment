@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import sg.edu.nus.iss.ibfb4ssfassessment.model.Movie;
-import sg.edu.nus.iss.ibfb4ssfassessment.repo.MovieRepo;
 import sg.edu.nus.iss.ibfb4ssfassessment.service.DatabaseService;
 import sg.edu.nus.iss.ibfb4ssfassessment.service.FileService;
 
@@ -38,6 +37,7 @@ public class IbfB4SsfAssessmentApplication implements CommandLineRunner {
 
 		System.out.println("Number of movies: " + databaseService.getNumberOfMovies());
 
+		System.out.println(databaseService.getMovieById(12333).toString());
 	}
 
 }
