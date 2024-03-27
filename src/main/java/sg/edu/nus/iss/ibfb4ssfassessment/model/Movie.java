@@ -16,7 +16,7 @@ public class Movie {
     double rating;
     Date formattedReleaseDate;
     int count;
-    
+
     // constructor
     public Movie() {
     }
@@ -110,16 +110,23 @@ public class Movie {
         this.count = count;
     }
 
+    // @Override
+    // public String toString() {
+    // return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year +
+    // ", rated=" + rated
+    // + ", releaseDate=" + releaseDate + ", runTime=" + runTime + ", genre=" +
+    // genre + ", director="
+    // + director + ", rating=" + rating + ", formattedReleaseDate=" +
+    // formattedReleaseDate + ", count="
+    // + count + "]";
+    // }
+
     @Override
     public String toString() {
-        return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", rated=" + rated
-                + ", releaseDate=" + releaseDate + ", runTime=" + runTime + ", genre=" + genre + ", director="
-                + director + ", rating=" + rating + ", formattedReleaseDate=" + formattedReleaseDate + ", count="
-                + count + "]";
+        return "movieId: " + movieId + "\ntitle: " + title + "\nyear: " + year + "\nrated: " + rated
+                + "\nreleaseDate: " + releaseDate + "\nrunTime: " + runTime + "\ngenre: " + genre + "\ndirector: "
+                + director + "\nrating: " + rating + "\nformattedReleaseDate: " + formattedReleaseDate + "\ncount: "
+                + count + "\n";
     }
-
-    
-    
-    
 
 }

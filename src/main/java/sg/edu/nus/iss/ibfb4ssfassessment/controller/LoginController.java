@@ -33,12 +33,12 @@ public class LoginController {
         if (bindings.hasErrors()) {
             mav.addObject(login);
             mav.setViewName("view0");
-            System.out.println("Global error: " + bindings.getGlobalErrors());
-            System.out.println("Field error:" + bindings.getFieldErrors());
+            // System.out.println("Global error: " + bindings.getGlobalErrors());
+            // System.out.println("Field error:" + bindings.getFieldErrors());
         } else {
             mav.setViewName("view1");
             session.setAttribute("login", login);
-            System.out.println(login.toString());
+            // System.out.println(login.toString());
         }
         return mav;
     }

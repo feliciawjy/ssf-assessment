@@ -41,7 +41,4 @@ public class Login {
         this.birthDate = birthDate;
     }
 
-    
-    
-
 }

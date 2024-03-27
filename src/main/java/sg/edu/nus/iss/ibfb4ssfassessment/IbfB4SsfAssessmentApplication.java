@@ -30,6 +30,7 @@ public class IbfB4SsfAssessmentApplication implements CommandLineRunner {
 
 		List<Movie> movieList = fileService.readFile("movies.json");
 
+		System.out.println("==========List of Movies==========");
 		for (Movie movie : movieList) {
 			System.out.println(movie.toString());
 			databaseService.saveRecord(movie);
@@ -39,6 +40,10 @@ public class IbfB4SsfAssessmentApplication implements CommandLineRunner {
 		// System.out.println("Number of movies: " + databaseService.getNumberOfMovies());
 		// System.out.println(databaseService.getMovieById(12333).toString());
 		// System.out.println(databaseService.getAllMovies().toString());
+
+		// System.out.println("INCREMENT");
+		// databaseService.incrementCount(12333);
+		// System.out.println(databaseService.getMovieById(12333).toString());
 	}
 
 }

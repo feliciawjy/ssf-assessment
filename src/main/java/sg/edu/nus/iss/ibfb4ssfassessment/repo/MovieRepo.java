@@ -66,6 +66,12 @@ public class MovieRepo {
     }
 
     // Update
+    // increment count after booking
+    public void updateMovie(Movie movie) {
+        HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
+        hashOps.put(Util.KEY_MOVIE, String.valueOf(movie.getMovieId()), toJson(movie).toString());
+    }
+
     // Delete
 
     private JsonObject toJson(Movie movie) {

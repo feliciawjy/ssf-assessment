@@ -14,8 +14,6 @@ import sg.edu.nus.iss.ibfb4ssfassessment.util.Util;
 @Configuration
 public class RedisConfig {
 
-    // Put in your redis configuration here
-    // inject application.properties into this configuration
     @Value("${spring.data.redis.host}")
     private String redisHost;
 

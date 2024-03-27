@@ -62,7 +62,7 @@ public class MovieController {
             } else if ("PG-13".equals(movie.getRated()) && age < 13) {
                 return "BookError";
             } else {
-                
+                databaseService.incrementCount(movie.getMovieId());
                 model.addAttribute("movie", movie);
                 return "BookSuccess";
             }

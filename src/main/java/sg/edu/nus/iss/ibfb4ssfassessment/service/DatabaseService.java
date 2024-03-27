@@ -39,4 +39,12 @@ public class DatabaseService {
 
         return repo.getMovieList();
     }
+
+    // Task 9
+    public void incrementCount(int id) {
+
+        Movie movie = repo.getMovieById(id);
+        movie.setCount(repo.getMovieById(id).getCount() + 1);
+        repo.updateMovie(movie);
+    }
 }
