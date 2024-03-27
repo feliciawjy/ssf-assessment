@@ -2,6 +2,9 @@ package sg.edu.nus.iss.ibfb4ssfassessment.repo;
 
 import java.io.StringReader;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +39,18 @@ public class MovieRepo {
     }
 
     // read all
+    public List<Movie> getMovieList() {
+        HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
+        List<Movie> movies = new LinkedList<>();
+        Map<String, String> movieMap = hashOps.entries(Util.KEY_MOVIE);
+
+        for (String s : movieMap.values()) {
+            Movie movie = parseMovieFromJsonString(s);
+            movies.add(movie);
+        }
+
+        return movies;
+    }
 
     // read one
     // public Movie getMovie(Integer index) {

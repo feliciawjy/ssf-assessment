@@ -37,6 +37,6 @@ public class DatabaseService {
     // TODO: Task 5
     public List<Movie> getAllMovies() {
 
-        return null;
+        return repo.getMovieList();
     }
 }
