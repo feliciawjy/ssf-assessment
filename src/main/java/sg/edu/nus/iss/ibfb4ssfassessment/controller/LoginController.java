@@ -45,8 +45,10 @@ public class LoginController {
 
     // For the logout button shown on View 2
     // On logout, session should be cleared
-    public String logout() {
-        return null;
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        return "redirect:/login";
 
     }
 

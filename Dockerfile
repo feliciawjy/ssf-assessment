@@ -1,18 +1,29 @@
-FROM maven:3-eclipse-temurin-21
+FROM openjdk:21-jdk-bullseye AS builder
 
 WORKDIR /app
 
-COPY mvnw.cmd .
 COPY mvnw .
 COPY pom.xml .
-COPY src src
 COPY .mvn .mvn
-COPY movie.json .
+COPY src src
+COPY movies.json .
 
-RUN mvn package -Dmaven.test.skip=true
 
-ENV PORT=8080
+RUN chmod a+x mvnw
+RUN ./mvnw package -Dmaven.test.skip=true
+
+
+FROM openjdk:21-jdk-bullseye
+
+WORKDIR /app_run
+
+COPY --from=builder /app/target/ibf-b4-ssf-assessment-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/movies.json /app_run/movies.json
+
+##run
+ENV PORT=8080 
+
 
 EXPOSE ${PORT}
 
-ENTRYPOINT SERVER_PORT=${PORT} java -jar target/practice-test-0.0.1-SNAPSHOT.jar
+ENTRYPOINT SERVER_PORT=${PORT} java -jar app.jar

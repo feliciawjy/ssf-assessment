@@ -35,8 +35,33 @@ public class MovieController {
     }
 
     // TODO: Task 9
-    public String bookMovie() {
-        return null;
+    @GetMapping(path = "/book/{movieId}")
+    public String bookMovie(@PathVariable("movieId") String movieId, Model model, HttpSession httpSession) {
+
+        // get the movie object
+        Movie movie = databaseService.getMovieById(Integer.parseInt(movieId));
+
+        // calculate the age
+        httpSession.getAttribute("login");
+
+        Long age = 14L;
+
+        // success or error due to age
+        if ("R".equals(movie.getRating())) {
+            if (age >= 18) {
+                return "BookSuccess";
+            } else {
+                return "BookError";
+            }
+        } else if ("PG-13".equals(movie.getRating())){
+            if (age >= 13) {
+                return "BookSuccess";
+            } else {
+                return "BookError";
+            }
+        } else {
+            return "BookSuccess";
+        }
 
     }
 
