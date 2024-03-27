@@ -16,13 +16,13 @@ public class DatabaseService {
 
     // TODO: Task 2 (Save to Redis Map)
     public void saveRecord(Movie movie) {
-
+        repo.addMovie(movie);
     }
 
     // TODO: Task 3 (Map or List - comment where necesary)
-    public long getNumberOfEvents() {
-
-        return (Long) null;
+    public long getNumberOfMovies() {
+        long numberOfMovies = repo.getNumberOfMovies();
+        return numberOfMovies;
     }
 
     public Movie getMovie(Integer index) {

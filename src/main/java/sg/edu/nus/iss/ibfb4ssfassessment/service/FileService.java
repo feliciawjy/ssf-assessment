@@ -16,7 +16,7 @@ import jakarta.json.JsonReader;
 import sg.edu.nus.iss.ibfb4ssfassessment.model.Movie;
 
 @Service
-public record FileService() {
+public class FileService {
 
     // TODO: Task 1
     public List<Movie> readFile(String fileName) throws FileNotFoundException{
